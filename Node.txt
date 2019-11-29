@@ -21,6 +21,7 @@ Class Node:
 	outros:
 		print_tree: imprime a árvore como um DFS
 		check_reex: verifica se uma árvore é uma Expr.Reg.
+		followList: implementado segundo o 'lemma2.2'
 
 
 exemplo de árvore: "a(a+b)*"::concat(atomo(a),star(disj(atomo(a),atomo(b))))
