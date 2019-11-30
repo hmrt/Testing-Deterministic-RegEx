@@ -1,0 +1,15 @@
+
+node1 = Node('disj','1','+')
+node2 = Node('atom','11','a')
+node3 = Node('star','12','*')
+node4 = Node('atom','121','b')
+k = node1.get_right()
+print "Tree from k:"
+print k.print_tree()
+print
+print "Root: "+k.get_root().symbol
+print
+print "Tree:"
+print k.get_root().print_tree()
+print
+print "Reg.Exp? "+str(get_root().check_reex())
