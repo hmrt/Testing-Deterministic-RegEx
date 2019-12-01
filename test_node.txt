@@ -13,3 +13,30 @@ print "Tree:"
 print k.get_root().print_tree()
 print
 print "Reg.Exp? "+str(get_root().check_reex())
+
+##################################################
+
+NT = {}
+kkk = str2regexp("(a*(b(a*)b(a*))*(a(aa+b*bbb*)*)*)*")
+kkk = kkk.marked()
+eTree(kkk,"1")
+print kkk.followListsD()
+print followList()
+
+#################################################
+
+a = str2regexp("a(b+cd)*")
+a = a.marked()
+NT = {}
+eTree(a,"1")
+p = NT.get("11") # atom(a)
+q = NT.get("12") # star(b+cd)
+q1 = NT.get("1211") # atom(b)
+q2 = NT.get("12121") # atom(c)
+q3 = NT.get("12122") # atom(d)
+print "atom(a) is followed by atom(b): %s"%follow(p,q1)
+print "atom(a) is followed by atom(c): %s"%follow(p,q2)
+print "atom(a) is followed by atom(d): %s"%follow(p,q3)
+print "atom(a) is followed by:",p.followList()
+print "star(b+cd) first:",q.first()
+print "star(b+cd) last:",q.last()
