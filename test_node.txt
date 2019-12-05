@@ -14,6 +14,21 @@ print k.get_root().print_tree()
 print
 print "Reg.Exp? "+str(get_root().check_reex())
 
+#################################################
+################ LEMMA 2.6 ######################
+#################################################
+
+# epsilon acceptance by lemma 2.6
+def ewp_SupFirst(p,q):
+    node = pSupFirst(q)
+    if len(node.path) == 1 or p.type != position or q.type != position or not follow(p,q):
+        return False
+    node = node.get_parent()
+    if node.reflexive(pSupLast(p)):
+        return True
+    return False
+
+
 ##################################################
 
 NT = {}
@@ -40,3 +55,56 @@ print "atom(a) is followed by atom(d): %s"%follow(p,q3)
 print "atom(a) is followed by:",p.followList()
 print "star(b+cd) first:",q.first()
 print "star(b+cd) last:",q.last()
+
+#################################################
+########## CRIAR RANDOM REGEXP ##################
+#################################################
+
+from FAdo.cfg import *
+from FAdo.fa import *
+op = reStringRGenerator(Sigma=["a","b"], size=1000, cfgr=reGrammar["g_rpn"], epsilon=None, empty=None)
+# cProfile.run()
+l = op.generate()
+r = str2regexp(l,parser=ParserRPN).reduced()
+marked = r.marked()
+NT = {}
+eTree(marked,"1")
+
+
+#################################################
+########## check if it's correct ################
+#################################################
+
+def f():
+    d = marked.followListsD()
+    k = followList()
+    for x in d:
+        if set(d[x]) != k[x]:
+            print d[x],"...",k[x]
+            return False
+    return True
+print f()
+
+#################################################
+############## eTree structure ##################
+#################################################
+
+"""
+Node* node;
+union{
+    void none;
+    struct eTree* son;
+    struct{
+        struct eTree* son1;
+        struct eTree* son2;
+    }
+}
+"""
+
+##################################################
+########## check if it's correct ################
+#################################################
+
+-> criar class TREE;
+-> BuildNext();
+-> otimizar followList

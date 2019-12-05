@@ -32,3 +32,6 @@ exemplo de árvore: "a(a+b)*"::concat(atomo(a),star(disj(atomo(a),atomo(b))))
 		(disj,"121","a+b"):
 			(atomo,"1211","a")
 			(atomo,"1212","b")
+
+
+o followList() usa a função __repr__ para representar os átomos na lista :: [position("a", 1)]
