@@ -1,0 +1,37 @@
+
+NodeTable (NT):
+	dicionário do tipo :: Str -> Node
+
+
+Class Node:
+	Node(type,path,exp):
+		valor 'type' com o tipo do nó (e.g. atomo, disj, etc)
+		valor 'path' com o caminho desde a raiz até esse nó.
+		valor 'exp' com a expressão desse nó
+
+	setters:
+		set_left: defenir filho esquerdo de um nó
+		set_right: defenir filho direito de um nó
+	getters:
+		get_left: retorna o filho esquerdo do nó
+		get_right: retorna o filho direito do nó
+		get_parent: retorna o nó pai do nó
+		get_root: retorna o nó raiz (path == '1')
+
+	outros:
+		print_tree: imprime a árvore como um DFS
+		check_reex: verifica se uma árvore é uma Expr.Reg.
+		followList: implementado segundo o 'lemma2.2'
+
+
+exemplo de árvore: "a(a+b)*"::concat(atomo(a),star(disj(atomo(a),atomo(b))))
+	
+(concat,"1","a(a+b)*"):
+	(atomo,"11","a"):
+	(star,"12","(a+b)*"):
+		(disj,"121","a+b"):
+			(atomo,"1211","a")
+			(atomo,"1212","b")
+
+
+o followList() usa a função __repr__ para representar os átomos na lista :: [position("a", 1)]
